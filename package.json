@@ -1,0 +1,37 @@
+{
+  "name": "creepypasta",
+  "version": "0.0.1",
+  "description": "Application for playing writing games",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node --experimental-modules server.mjs",
+    "test": "jest"
+  },
+  "keywords": [
+    "games",
+    "writing"
+  ],
+  "author": "Brian David <beejunk@gmail.com>",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "htm": "^2.2.1",
+    "preact": "^10.0.5",
+    "preact-render-to-string": "^5.1.1"
+  },
+  "devDependencies": {
+    "@pika/web": "^0.6.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.19.1"
+  },
+  "@pika/web": {
+    "webDependencies": [
+      "preact",
+      "htm"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 import express from "express";
 import render from "preact-render-to-string";
 
-import Index from "../components/pages/Index";
+import Index from "../client/components/pages/Index";
 
 const index = express.Router();
 

@@ -12,10 +12,7 @@ app.use(
   express.static(path.resolve(process.cwd(), "web_modules"))
 );
 
-app.use(
-  "/components",
-  express.static(path.resolve(process.cwd(), "components"))
-);
+app.use("/client", express.static(path.resolve(process.cwd(), "client")));
 
 app.use("/", index);
 

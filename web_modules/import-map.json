@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "preact": "./preact.js",
-    "preact/hooks": "./preact/hooks.js",
-    "preact/compat": "./preact/compat.js",
-    "htm": "./htm.js",
-    "htm/preact": "./htm/preact.js"
-  }
-}

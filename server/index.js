@@ -1,7 +1,7 @@
 import path from "path";
 import express from "express";
 
-import index from "./routes/index";
+import index from "./routes/index.js";
 
 const { PORT = 3000 } = process.env;
 

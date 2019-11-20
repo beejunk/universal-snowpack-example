@@ -1,10 +1,12 @@
 {
-  "name": "creepypasta",
+  "name": "universalpika",
+  "type": "module",
   "version": "0.0.1",
-  "description": "Application for playing writing games",
-  "main": "server.mjs",
+  "description": "Example universal Javascript app using Pika",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node --experimental-modules server.mjs",
+    "start": "node --experimental-modules server/index.js",
+    "start:debug": "node --inspect --experimental-modules server/index.js",
     "test": "jest"
   },
   "keywords": [
@@ -31,7 +33,10 @@
   "@pika/web": {
     "webDependencies": [
       "preact",
-      "htm"
+      "preact/hooks",
+      "preact/compat",
+      "htm",
+      "htm/preact"
     ]
   }
 }

@@ -1,10 +1,10 @@
 import express from "express";
-import render from "preact-render-to-string";
 
+import { render } from "../../web_modules/preact-render-to-string.js";
 import { html } from "../../web_modules/htm/preact.js";
 import BasePage from "../../client/components/shared/BasePage.js";
 import Index, { Head, PAGE } from "../../client/components/pages/Index.js";
-import withDoctype from "../utils/withDoctypes.js";
+import withDoctype from "../utils/withDoctype.js";
 
 const index = express.Router();
 

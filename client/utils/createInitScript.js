@@ -6,14 +6,12 @@
  */
 export default function createInitScript(page) {
   const script = `
-    import { hydrate } from "/web_modules/preact.js";
-    import { html } from "/web_modules/htm/preact.js";
+    import { h, hydrate } from "/web_modules/preact.js";
     import ${page} from "/client/components/pages/${page}.js";
 
     const mountElement = document.getElementById("${page}");
-    const page = html\`<${page} />\`;
 
-    hydrate(page, mountElement);
+    hydrate(h(${page}), document.body);
   `;
 
   return script;

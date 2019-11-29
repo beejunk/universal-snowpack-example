@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node --experimental-modules server/index.js",
     "start:debug": "node --inspect --experimental-modules server/index.js",
-    "prepare": "pika install"
+    "prepare": "npx @pika/cli install --clean"
   },
   "keywords": [
     "games",
@@ -34,7 +34,7 @@
     "webDependencies": [
       "preact",
       "preact/hooks",
-      "preact/compat",
+      "preact-render-to-string",
       "htm",
       "htm/preact"
     ]

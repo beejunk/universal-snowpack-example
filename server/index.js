@@ -1,11 +1,16 @@
 import path from "path";
 import express from "express";
 
+import viewEngine from "./utils/viewEngine.js";
 import index from "./routes/index.js";
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.engine("js", viewEngine);
+app.set("views", path.resolve(process.cwd(), "client", "components", "pages"));
+app.set("view engine", "js");
 
 app.use(
   "/web_modules",

@@ -6,7 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node --experimental-modules server/index.js",
-    "start:debug": "node --inspect --experimental-modules server/index.js",
+    "dev": "npx nodemon --inspect --experimental-modules server/index.js",
     "prepare": "npx @pika/cli install --clean"
   },
   "keywords": [
@@ -28,6 +28,7 @@
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
+    "nodemon": "^2.0.1",
     "prettier": "^1.19.1"
   },
   "@pika/web": {

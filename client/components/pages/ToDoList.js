@@ -24,23 +24,31 @@ function ToDoList(props) {
   }
 
   return html`
-    <main id=${PAGE}>
-      <h1>To-Do with Pika!</h1>
+    <main id=${PAGE} class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-xl-6">
+          <h1 class="text-center">To-Do with Pika!</h1>
+        </div>
+      </div>
 
-      <ul>
-        ${state.toDos.map(
-          toDoId =>
-            html`
-              <${ToDo}
-                key=${toDoId}
-                text=${toDosById[toDoId].text}
-                removeToDo=${() => {
-                  removeToDo(toDoId);
-                }}
-              />
-            `
-        )}
-      </ul>
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-xl-6">
+          <ul class="list-group">
+            ${state.toDos.map(
+              toDoId =>
+                html`
+                  <${ToDo}
+                    key=${toDoId}
+                    text=${toDosById[toDoId].text}
+                    removeToDo=${() => {
+                      removeToDo(toDoId);
+                    }}
+                  />
+                `
+            )}
+          </ul>
+        </div>
+      </div>
     </main>
   `;
 }

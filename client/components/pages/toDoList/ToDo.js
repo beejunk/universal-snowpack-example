@@ -5,12 +5,22 @@ function ToDo(props) {
   const { text, removeToDo } = props;
 
   return html`
-    <li class="ToDo">
-      ${text}
+    <li class="ToDo list-group-item">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-8 col-xl-9">
+          ${text}
+        </div>
 
-      <button onClick=${removeToDo}>
-        Done
-      </button>
+        <div class="col-4 col-xl-3">
+          <button
+            type="button"
+            class="btn btn-block btn-success"
+            onClick=${removeToDo}
+          >
+            Done
+          </button>
+        </div>
+      </div>
     </li>
   `;
 }

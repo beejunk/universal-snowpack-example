@@ -38,7 +38,13 @@ function reducer(state, action) {
 
       return {
         toDos: nextToDos,
-        toDosById: nextToDos.map(id => ({ [id]: state.toDosById[id] }))
+        toDosById: nextToDos.reduce(
+          (nextToDosById, id) => ({
+            ...nextToDosById,
+            [id]: state.toDosById[id]
+          }),
+          {}
+        )
       };
     }
     default:
@@ -61,16 +67,15 @@ function ToDoList(props) {
         <div class="col-12 col-sm-8 col-xl-6">
           <ul class="list-group">
             ${state.toDos.map(
-              toDoId =>
-                html`
-                  <${ToDo}
-                    key=${toDoId}
-                    text=${state.toDosById[toDoId].text}
-                    removeToDo=${() => {
-                      dispatch(removeToDo(toDoId));
-                    }}
-                  />
-                `
+              toDoId => html`
+                <${ToDo}
+                  key=${toDoId}
+                  text=${state.toDosById[toDoId].text}
+                  removeToDo=${() => {
+                    dispatch(removeToDo(toDoId));
+                  }}
+                />
+              `
             )}
           </ul>
         </div>

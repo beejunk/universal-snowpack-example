@@ -4,6 +4,10 @@ import { html } from "../../web_modules/htm/preact.js";
 import BasePage from "../../client/components/shared/BasePage.js";
 import Index from "../../client/components/pages/Index.js";
 
+/**
+ * Preact-based view engine. There's only one page (Index) in this example, so
+ * it's a pretty simple implementation.
+ */
 export default function(filePath, options, callback) {
   const { pageProps } = options;
   const debug = process.env.NODE_ENV !== "production";

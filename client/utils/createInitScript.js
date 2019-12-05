@@ -4,8 +4,9 @@
  * @param {Object} options
  * @param {string} options.page - Name of the page component to be rendered.
  * @param {Object} options.pageProps - Optional data to be serialized onto the
- *  page and passed in as props to the page component.
- * @param {boolean} options.debug - If `true` the Preact dev-tools will be
+ *  page and passed in as props to the page component. This is how we can use
+ *  server-side data to hydrate the component client-side.
+ * @param {boolean} options.debug - If `true`, the Preact dev-tools will be
  *   imported.
  *
  * @returns {string}

@@ -3,7 +3,7 @@ import express from "express";
 const index = express.Router();
 
 index.get("/", (req, res) => {
-  // Mock out some data that might be fetched server-side.
+  // Mock data that might be fetched server-side in a real app.
   const exampleServerData = {
     toDos: [1, 2, 3, 4],
     toDosById: {

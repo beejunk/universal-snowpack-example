@@ -1,5 +1,5 @@
 /**
- * Preface the provided string with a doctype tag.
+ * Preface the provided string with a DOCTYPE tag.
  *
  * @param {string} str
  * @returns {string}

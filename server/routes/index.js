@@ -14,7 +14,7 @@ index.get("/", (req, res) => {
     }
   };
 
-  res.render("ToDoList", { pageProps: exampleServerData });
+  res.render("Index", { pageProps: exampleServerData });
 });
 
 export default index;

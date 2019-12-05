@@ -4,7 +4,7 @@ import { PropTypes } from "../../../../web_modules/prop-types.js";
 
 function ToDoForm(props) {
   const { addToDo } = props;
-  const [state, setState] = useState("hello");
+  const [state, setState] = useState("");
 
   return html`
     <form>

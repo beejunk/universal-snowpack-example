@@ -15,7 +15,7 @@ export default function createInitScript({ page, pageProps, debug }) {
   const script = `
     import { h, hydrate } from "/web_modules/preact.js";
     ${debug ? 'import "/web_modules/preact/debug.js"' : ""}
-    import ${page} from "/client/components/pages/${page}.js";
+    import ${page} from "/client/pages/${page}.js";
 
     const mountElement = document.getElementById("${page}");
     ${pageProps ? `window.__DATA__ = ${JSON.stringify(pageProps)};` : ""}

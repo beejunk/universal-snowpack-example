@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node --experimental-modules server/index.js",
     "dev": "npx nodemon --inspect --experimental-modules server/index.js",
-    "prepare": "npx @pika/cli install --clean"
+    "prepare": "pika install --clean"
   },
   "keywords": [
     "games",
@@ -23,6 +23,7 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
+    "@pika/cli": "^0.2.0",
     "@pika/web": "^0.6.1",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",

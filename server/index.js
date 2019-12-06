@@ -9,7 +9,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.engine("js", viewEngine);
-app.set("views", path.resolve(process.cwd(), "client", "components", "pages"));
+app.set("views", path.resolve(process.cwd(), "client", "pages"));
 app.set("view engine", "js");
 
 app.use(

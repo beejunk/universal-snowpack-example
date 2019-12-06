@@ -1,5 +1,5 @@
-import { html } from "../../../../web_modules/htm/preact.js";
-import { PropTypes } from "../../../../web_modules/prop-types.js";
+import { html } from "../../../web_modules/htm/preact.js";
+import { PropTypes } from "../../../web_modules/prop-types.js";
 
 function ToDo(props) {
   const { text, removeToDo } = props;

@@ -1,18 +1,15 @@
-import { html } from "../../../web_modules/htm/preact.js";
-import { useReducer } from "../../../web_modules/preact/hooks.js";
-import { PropTypes } from "../../../web_modules/prop-types.js";
+import { html } from "../../web_modules/htm/preact.js";
+import { useReducer } from "../../web_modules/preact/hooks.js";
+import { PropTypes } from "../../web_modules/prop-types.js";
 
-import ToDo from "./index/ToDo.js";
-import ToDoForm from "./index/ToDoForm.js";
+import shoddyUUIDGenerator from "../utils/shoddyUUIDGenerator.js";
+import ToDo from "../components/index/ToDo.js";
+import ToDoForm from "../components/index/ToDoForm.js";
 
 const PAGE = "Index";
 
 const ADD_TO_DO = "ADD_TO_DO";
 const REMOVE_TO_DO = "REMOVE_TO_DO";
-
-function shoddyUUIDgenerator() {
-  return Number(`${Date.now()}${Math.ceil(Math.random() * 1000)}`);
-}
 
 function addToDo(text) {
   return { type: ADD_TO_DO, text };
@@ -26,7 +23,7 @@ function reducer(state, action) {
   switch (action.type) {
     case ADD_TO_DO: {
       const { text } = action;
-      const id = shoddyUUIDgenerator();
+      const id = shoddyUUIDGenerator();
 
       return {
         toDos: [...state.toDos, id],

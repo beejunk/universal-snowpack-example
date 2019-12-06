@@ -2,7 +2,7 @@ import withDoctype from "./withDoctype.js";
 import { render } from "../../web_modules/preact-render-to-string.js";
 import { html } from "../../web_modules/htm/preact.js";
 import BasePage from "../../client/components/shared/BasePage.js";
-import Index from "../../client/components/pages/Index.js";
+import Index from "../../client/pages/Index.js";
 
 /**
  * Preact-based view engine. There's only one page (Index) in this example, so

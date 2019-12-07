@@ -19,15 +19,15 @@
     "express": "^4.17.1",
     "htm": "^2.2.1",
     "preact": "^10.0.5",
-    "preact-render-to-string": "^5.1.1",
+    "preact-render-to-string": "^5.1.2",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@pika/cli": "^0.2.0",
     "@pika/web": "^0.6.1",
-    "eslint": "^6.6.0",
+    "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.5.0",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
     "nodemon": "^2.0.1",

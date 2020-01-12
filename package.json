@@ -3,6 +3,10 @@
   "type": "module",
   "version": "0.1.0",
   "description": "Example universal Javascript app using Snowpack",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beejunk/universal-pika-example"
+  },
   "main": "server/index.js",
   "scripts": {
     "start": "node --experimental-modules server/index.js",

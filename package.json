@@ -14,8 +14,9 @@
     "prepare": "snowpack install --clean"
   },
   "keywords": [
-    "games",
-    "writing"
+    "javascript",
+    "snowpack",
+    "to-do"
   ],
   "author": "Brian David <beejunk@gmail.com>",
   "license": "GPL-3.0",

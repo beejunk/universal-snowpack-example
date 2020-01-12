@@ -56,7 +56,7 @@ function ToDoList(props) {
     <main id=${PAGE} class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-8 col-xl-6">
-          <h1 class="text-center">To-Do with Pika!</h1>
+          <h1 class="text-center">To-Do with Snowpack!</h1>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ function ToDoList(props) {
 }
 
 ToDoList.Head = html`
-  <title>To-Do with Pika!</title>
+  <title>To-Do with Snowpack!</title>
 `;
 
 ToDoList.pageName = PAGE;

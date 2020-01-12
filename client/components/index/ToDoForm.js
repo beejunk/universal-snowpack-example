@@ -11,7 +11,7 @@ function ToDoForm(props) {
       <div class="form-group">
         <div class="row">
           <label class="col h2 text-center" for="create-to-do-form">
-            Create ToDo
+            Create To-Do
           </label>
         </div>
 

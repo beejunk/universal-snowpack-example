@@ -1,13 +1,13 @@
 {
-  "name": "universalpika",
+  "name": "universalsnowpack",
   "type": "module",
-  "version": "0.0.1",
-  "description": "Example universal Javascript app using Pika",
+  "version": "0.1.0",
+  "description": "Example universal Javascript app using Snowpack",
   "main": "server/index.js",
   "scripts": {
     "start": "node --experimental-modules server/index.js",
     "dev": "npx nodemon --inspect --experimental-modules server/index.js",
-    "prepare": "pika install --clean"
+    "prepare": "snowpack install --clean"
   },
   "keywords": [
     "games",
@@ -23,17 +23,16 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@pika/cli": "^0.2.0",
-    "@pika/web": "^0.6.1",
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.1",
     "nodemon": "^2.0.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "snowpack": "^1.0.3"
   },
-  "@pika/web": {
+  "snowpack": {
     "webDependencies": [
       "preact",
       "preact/debug",

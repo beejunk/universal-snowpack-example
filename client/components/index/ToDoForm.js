@@ -19,7 +19,7 @@ function ToDoForm(props) {
           class="form-control"
           id="create-to-do-form"
           value=${state}
-          onInput=${e => {
+          onInput=${(e) => {
             setState(e.target.value);
           }}
         />
@@ -30,7 +30,7 @@ function ToDoForm(props) {
           <button
             type="submit"
             class="btn btn-block btn-primary"
-            onClick=${e => {
+            onClick=${(e) => {
               e.preventDefault();
               addToDo(state);
               setState("");
@@ -45,7 +45,7 @@ function ToDoForm(props) {
 }
 
 ToDoForm.propTypes = {
-  addToDo: PropTypes.func
+  addToDo: PropTypes.func,
 };
 
 export default ToDoForm;

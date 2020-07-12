@@ -8,7 +8,7 @@ import Index from "../../client/pages/Index.js";
  * Preact-based view engine. There's only one page (Index) in this example, so
  * it's a pretty simple implementation.
  */
-export default function(filePath, options, callback) {
+export default function viewEngine(filePath, options, callback) {
   const { pageProps } = options;
   const debug = process.env.NODE_ENV !== "production";
 

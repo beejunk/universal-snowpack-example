@@ -27,21 +27,21 @@ function reducer(state, action) {
 
       return {
         toDos: [...state.toDos, id],
-        toDosById: { ...state.toDosById, [id]: { text } }
+        toDosById: { ...state.toDosById, [id]: { text } },
       };
     }
     case REMOVE_TO_DO: {
-      const nextToDos = state.toDos.filter(id => id !== action.id);
+      const nextToDos = state.toDos.filter((id) => id !== action.id);
 
       return {
         toDos: nextToDos,
         toDosById: nextToDos.reduce(
           (nextToDosById, id) => ({
             ...nextToDosById,
-            [id]: state.toDosById[id]
+            [id]: state.toDosById[id],
           }),
           {}
-        )
+        ),
       };
     }
     default:
@@ -64,7 +64,7 @@ function ToDoList(props) {
         <div class="col-12 col-sm-8 col-xl-6">
           <ul class="list-group">
             ${state.toDos.map(
-              toDoId => html`
+              (toDoId) => html`
                 <${ToDo}
                   key=${toDoId}
                   text=${state.toDosById[toDoId].text}
@@ -81,7 +81,7 @@ function ToDoList(props) {
       <div class="row justify-content-center mt-4">
         <div class="col-12 col-sm-8 col-xl-6">
           <${ToDoForm}
-            addToDo=${text => {
+            addToDo=${(text) => {
               dispatch(addToDo(text));
             }}
           />
@@ -91,24 +91,22 @@ function ToDoList(props) {
   `;
 }
 
-ToDoList.Head = html`
-  <title>To-Do with Snowpack!</title>
-`;
+ToDoList.Head = html` <title>To-Do with Snowpack!</title> `;
 
 ToDoList.pageName = PAGE;
 
 ToDoList.defaultProps = {
   toDos: [],
-  toDosById: {}
+  toDosById: {},
 };
 
 ToDoList.propTypes = {
   toDos: PropTypes.arrayOf(PropTypes.number),
   toDosById: PropTypes.objectOf(
     PropTypes.shape({
-      text: PropTypes.string
+      text: PropTypes.string,
     })
-  )
+  ),
 };
 
 export default ToDoList;

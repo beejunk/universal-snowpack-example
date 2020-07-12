@@ -10,8 +10,8 @@ index.get("/", (req, res) => {
       1: { text: "Groceries" },
       2: { text: "Garbage" },
       3: { text: "Dishes" },
-      4: { text: "Mop" }
-    }
+      4: { text: "Mop" },
+    },
   };
 
   res.render("Index", { pageProps: exampleServerData });

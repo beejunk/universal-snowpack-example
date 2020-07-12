@@ -8,7 +8,7 @@ You can see a live example running here:
 
 ## Snowpack
 
-This application makes use of a handy tool called [Snowpack](https://github.com/pikapkg/snowpack) which will take all your ES-module-compatable dependencies and install them in a designated folder that can then be used to serve up all required JavaScript assets.
+This application makes use of a build tool called [Snowpack](https://github.com/pikapkg/snowpack) which will take all your ES-module-compatable dependencies and install them in a designated folder that can then be used to serve up all required JavaScript assets.
 
 ## Additional resources
 

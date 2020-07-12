@@ -27,7 +27,7 @@ function ToDo(props) {
 
 ToDo.propTypes = {
   text: PropTypes.string,
-  removeToDo: PropTypes.func.isRequired
+  removeToDo: PropTypes.func.isRequired,
 };
 
 export default ToDo;

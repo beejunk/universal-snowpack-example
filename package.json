@@ -1,7 +1,7 @@
 {
   "name": "universalsnowpack",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Example universal Javascript app using Snowpack",
   "repository": {
     "type": "git",
@@ -11,7 +11,12 @@
   "scripts": {
     "start": "node --experimental-modules server/index.js",
     "dev": "npx nodemon --inspect --experimental-modules server/index.js",
-    "prepare": "snowpack install --clean"
+    "prepare": "snowpack install",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix",
+    "clean": "npm run clean:web && npm run clean:node",
+    "clean:node": "rimraf node_modules",
+    "clean:web": "rimraf web_modules"
   },
   "keywords": [
     "javascript",
@@ -22,23 +27,24 @@
   "license": "GPL-3.0",
   "dependencies": {
     "express": "^4.17.1",
-    "htm": "^2.2.1",
+    "htm": "^3.0.4",
     "preact": "^10.2.1",
     "preact-render-to-string": "^5.1.3",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "eslint": "^7.4.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
-    "prettier": "^1.19.1",
-    "snowpack": "^1.0.3"
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "snowpack": "^2.6.4"
   },
   "snowpack": {
-    "webDependencies": [
+    "install": [
       "preact",
       "preact/debug",
       "preact/hooks",
@@ -46,6 +52,9 @@
       "htm",
       "htm/preact",
       "prop-types"
+    ],
+    "exclude": [
+      "**"
     ]
   }
 }

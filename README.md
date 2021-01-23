@@ -1,4 +1,4 @@
-# Example univeral JavaScript App using Snowpack V3
+# Example universal JavaScript App using Snowpack V3
 
 This is a *To-Do* application built with [Snowpack](https://github.com/pikapkg/snowpack) and [Preact](https://preactjs.com/). A live version can be found here: 
 

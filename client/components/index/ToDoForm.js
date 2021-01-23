@@ -1,6 +1,6 @@
-import { html } from "../../../web_modules/htm/preact.js";
-import { useState } from "../../../web_modules/preact/hooks.js";
-import { PropTypes } from "../../../web_modules/prop-types.js";
+import { useState } from "preact/hooks";
+import PropTypes from "prop-types";
+import { html } from "../../utils/preact";
 
 function ToDoForm(props) {
   const { addToDo } = props;

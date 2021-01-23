@@ -1,7 +1,7 @@
-import { html } from "../../web_modules/htm/preact.js";
-import { useReducer } from "../../web_modules/preact/hooks.js";
-import { PropTypes } from "../../web_modules/prop-types.js";
+import { useReducer } from "preact/hooks";
+import PropTypes from "prop-types";
 
+import { html } from "../utils/preact";
 import shoddyUUIDGenerator from "../utils/shoddyUUIDGenerator.js";
 import ToDo from "../components/index/ToDo.js";
 import ToDoForm from "../components/index/ToDoForm.js";
@@ -56,7 +56,9 @@ function ToDoList(props) {
     <main id=${PAGE} class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-8 col-xl-6">
-          <h1 class="text-center">To-Do with Snowpack!</h1>
+          <h1 class="text-center">
+            To-Do with Snowpack v3!
+          </h1>
         </div>
       </div>
 

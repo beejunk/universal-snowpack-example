@@ -1,9 +1,8 @@
-import { html } from "../../../web_modules/htm/preact.js";
-import createInitScript from "../../utils/createInitScript.js";
+import PropTypes from "prop-types";
+import { html } from "../../utils/preact";
 
 function BasePage(props) {
-  const { children, head, page, pageProps, debug } = props;
-  const initScript = createInitScript({ page, pageProps, debug });
+  const { children, head, debug } = props;
 
   return html`
     <html lang="en">
@@ -18,18 +17,30 @@ function BasePage(props) {
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous"
         />
+
+        ${debug &&
+        html`
+          <script
+            dangerouslySetInnerHTML="${{
+              __html: "window.HMR_WEBSOCKET_PORT = 3001;",
+            }}"
+          />
+          <script type="module" src="/_snowpack/hmr-client.js"></script>
+          <script type="module" src="/_snowpack/hmr-error-overlay.js"></script>
+        `}
       </head>
 
       <body>
         ${children}
-
-        <script
-          type="module"
-          dangerouslySetInnerHTML="${{ __html: initScript }}"
-        />
       </body>
     </html>
   `;
 }
+
+BasePage.propTypes = {
+  children: PropTypes.element,
+  head: PropTypes.element,
+  debug: PropTypes.bool,
+};
 
 export default BasePage;

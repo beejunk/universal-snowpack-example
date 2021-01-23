@@ -1,6 +1,7 @@
 import express from "express";
 
-const index = express.Router();
+const { Router } = express;
+const index = Router();
 
 index.get("/", (req, res) => {
   // Mock data that might be fetched server-side in a real app.

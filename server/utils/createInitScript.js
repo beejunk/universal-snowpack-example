@@ -1,3 +1,5 @@
+import serialize from "serialize-javascript";
+
 /**
  * Generate client-side initialization script for a page component.
  *
@@ -12,18 +14,17 @@
  * @returns {string}
  */
 export default function createInitScript({ page, pageProps, debug }) {
-  const script = `
-    import { h, hydrate } from "/web_modules/preact.js";
-    ${debug ? 'import "/web_modules/preact/debug.js"' : ""}
-    import ${page} from "/client/pages/${page}.js";
+  const serializedPageProps = serialize(pageProps, { isJSON: true });
 
-    const mountElement = document.getElementById("${page}");
-    ${pageProps ? `window.__DATA__ = ${JSON.stringify(pageProps)};` : ""}
-    ${
-      pageProps
-        ? `hydrate(h(${page}, window.__DATA__), document.body);`
-        : `hydrate(h(${page}), document.body);`
-    }
+  const script = `
+    import ${page} from "/pages/${page}.js";
+    import initPage from "/utils/initPage.js";
+
+    initPage({
+      pageProps: '${serializedPageProps}',
+      pageComponent: ${page},
+      debug: ${debug}
+    })
   `;
 
   return script;

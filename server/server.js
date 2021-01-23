@@ -11,7 +11,7 @@ const { startServer, createConfiguration } = snowpack;
 const HMR_PORT = 3001;
 
 /**
- * Creates the applicatin server.
+ * Creates the application server.
  *
  * @param {boolean} dev - If `true`, a SnowpackDevServer will be generated
  *   and used to serve client assets. If `false`, the server assumes there

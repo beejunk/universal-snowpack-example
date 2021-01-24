@@ -33,13 +33,18 @@ export default function createViewEngine(snowPackDevServer) {
     if (snowPackDevServer) {
       // Import assets from dev server runtime
       const runtime = snowPackDevServer.getServerRuntime();
-      const basePageComponentImport = await runtime.importModule(
-        "/components/shared/BasePage.js"
-      );
-      const indexComponentImport = await runtime.importModule(
-        "/pages/Index.js"
-      );
-      const preactImport = await runtime.importModule("/utils/preact.js");
+
+      const importPromises = [
+        runtime.importModule("/components/shared/BasePage.js"),
+        runtime.importModule("/pages/Index.js"),
+        runtime.importModule("/utils/preact.js"),
+      ];
+
+      const [
+        basePageComponentImport,
+        indexComponentImport,
+        preactImport,
+      ] = await Promise.all(importPromises);
 
       BasePage = basePageComponentImport.exports.default;
       Index = indexComponentImport.exports.default;
@@ -47,11 +52,16 @@ export default function createViewEngine(snowPackDevServer) {
       render = preactImport.exports.render;
     } else {
       // Import assets directly from build folder
-      const basePageComponentImport = await import(
-        "../build/components/shared/BasePage.js"
-      );
-      const indexComponentImport = await import("../build/pages/Index.js");
-      const preactImport = await import("../build/utils/preact.js");
+      const importPromises = [
+        import("../build/components/shared/BasePage.js"),
+        import("../build/pages/Index.js"),
+        import("../build/utils/preact.js"),
+      ];
+      const [
+        basePageComponentImport,
+        indexComponentImport,
+        preactImport,
+      ] = await Promise.all(importPromises);
 
       BasePage = basePageComponentImport.default;
       Index = indexComponentImport.default;

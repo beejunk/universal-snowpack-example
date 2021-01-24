@@ -16,7 +16,9 @@
     "start": "node scripts/start.js",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "clean": "rimraf node_modules"
+    "clean": "npm run clean:build && npm run clean:node",
+    "clean:build": "rimraf build",
+    "clean:node": "rimraf node_modules"
   },
   "keywords": [
     "javascript",
@@ -40,7 +42,6 @@
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.2",
-    "nodemon": "^2.0.2",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2"
   }

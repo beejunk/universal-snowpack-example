@@ -26,7 +26,7 @@ export default function createViewEngine(snowPackDevServer) {
     const dev = !!snowPackDevServer;
 
     let BasePage;
-    let Index;
+    let PageComponent;
     let html;
     let render;
 
@@ -36,35 +36,35 @@ export default function createViewEngine(snowPackDevServer) {
 
       const importPromises = [
         runtime.importModule("/components/shared/BasePage.js"),
-        runtime.importModule("/pages/Index.js"),
+        runtime.importModule(filePath),
         runtime.importModule("/utils/preact.js"),
       ];
 
       const [
         basePageComponentImport,
-        indexComponentImport,
+        pageComponentImport,
         preactImport,
       ] = await Promise.all(importPromises);
 
       BasePage = basePageComponentImport.exports.default;
-      Index = indexComponentImport.exports.default;
+      PageComponent = pageComponentImport.exports.default;
       html = preactImport.exports.html;
       render = preactImport.exports.render;
     } else {
       // Import assets directly from build folder
       const importPromises = [
         import("../build/components/shared/BasePage.js"),
-        import("../build/pages/Index.js"),
+        import(filePath),
         import("../build/utils/preact.js"),
       ];
       const [
         basePageComponentImport,
-        indexComponentImport,
+        pageComponentImport,
         preactImport,
       ] = await Promise.all(importPromises);
 
       BasePage = basePageComponentImport.default;
-      Index = indexComponentImport.default;
+      PageComponent = pageComponentImport.default;
       html = preactImport.html;
       render = preactImport.render;
     }

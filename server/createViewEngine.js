@@ -1,5 +1,9 @@
 import createInitScript from "./utils/createInitScript.js";
 import withDoctype from "./utils/withDoctype.js";
+import {
+  getPageNameFromPath,
+  getImportFromFilePath,
+} from "./utils/routUtils.js";
 
 /**
  * Create an Express view engine.
@@ -24,6 +28,7 @@ export default function createViewEngine(snowPackDevServer) {
   return async function viewEngine(filePath, options, callback) {
     const { pageProps } = options;
     const dev = !!snowPackDevServer;
+    const pageName = getPageNameFromPath(filePath);
 
     let BasePage;
     let PageComponent;
@@ -36,7 +41,7 @@ export default function createViewEngine(snowPackDevServer) {
 
       const importPromises = [
         runtime.importModule("/components/shared/BasePage.js"),
-        runtime.importModule(filePath),
+        runtime.importModule(getImportFromFilePath({ filePath, dev })),
         runtime.importModule("/utils/preact.js"),
       ];
 
@@ -54,7 +59,7 @@ export default function createViewEngine(snowPackDevServer) {
       // Import assets directly from build folder
       const importPromises = [
         import("../build/components/shared/BasePage.js"),
-        import(filePath),
+        import(getImportFromFilePath({ filePath, dev })),
         import("../build/utils/preact.js"),
       ];
       const [
@@ -70,14 +75,14 @@ export default function createViewEngine(snowPackDevServer) {
     }
 
     const initScript = createInitScript({
-      page: "Index",
+      page: pageName,
       pageProps,
       debug: dev,
     });
 
     const pageElement = html`
-      <${BasePage} head=${Index.Head} debug=${dev}>
-        <${Index} ...${pageProps} />
+      <${BasePage} head=${PageComponent.Head} debug=${dev}>
+        <${PageComponent} ...${pageProps} />
 
         <script
           type="module"

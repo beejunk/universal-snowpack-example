@@ -56,9 +56,7 @@ function ToDoList(props) {
     <main id=${PAGE} class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-8 col-xl-6">
-          <h1 class="text-center">
-            To-Do with Snowpack v3!
-          </h1>
+          <h1 class="text-center">To-Do with Snowpack v3!</h1>
         </div>
       </div>
 

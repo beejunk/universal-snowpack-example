@@ -91,10 +91,6 @@ function ToDoList(props) {
   `;
 }
 
-ToDoList.Head = html` <title>To-Do with Snowpack!</title> `;
-
-ToDoList.pageName = PAGE;
-
 ToDoList.defaultProps = {
   toDos: [],
   toDosById: {},
@@ -108,5 +104,15 @@ ToDoList.propTypes = {
     })
   ),
 };
+
+export const Head = html`<title>To-Do with Snowpack!</title>`;
+
+export async function getServerProps({ ctx }) {
+  const { db } = ctx;
+
+  const props = await db.getTodos();
+
+  return props;
+}
 
 export default ToDoList;

@@ -1,5 +1,7 @@
 import path from "path";
 
+import recursiveReaddir from "./recursiveReaddir.js";
+
 export function getPageNameFromPath(filePath) {
   const filePathParts = filePath.split("/");
   const fileName = filePathParts[filePathParts.length - 1];
@@ -22,4 +24,12 @@ export function getImportFromFilePath(options) {
   }
 
   return path.join(process.cwd(), "build", importPath);
+}
+
+export async function getRoutes() {
+  const baseDir = path.join(process.cwd(), "client", "pages");
+  const filePaths = await recursiveReaddir(baseDir);
+  const routes = filePaths.map((fpath) => getRouteFromFilePath(fpath));
+
+  return routes;
 }

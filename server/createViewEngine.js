@@ -4,6 +4,7 @@ import {
   getPageNameFromPath,
   getImportFromFilePath,
 } from "./utils/routUtils.js";
+import db from "../db/db.js";
 
 /**
  * Create an Express view engine.
@@ -18,20 +19,20 @@ import {
  */
 export default function createViewEngine(snowPackDevServer) {
   /**
-   * Preact-based view engine. There's only one page (Index) in this example, so
-   * it's a pretty simple implementation.
+   * Preact-based view engine.
    *
    * @param {string} filePath
    * @param {Object} options
    * @param {Function} callback
    */
   return async function viewEngine(filePath, options, callback) {
-    const { pageProps } = options;
     const dev = !!snowPackDevServer;
     const pageName = getPageNameFromPath(filePath);
 
     let BasePage;
     let PageComponent;
+    let Head;
+    let getServerProps;
     let html;
     let render;
 
@@ -53,6 +54,8 @@ export default function createViewEngine(snowPackDevServer) {
 
       BasePage = basePageComponentImport.exports.default;
       PageComponent = pageComponentImport.exports.default;
+      Head = pageComponentImport.exports.Head;
+      getServerProps = pageComponentImport.exports.getServerProps;
       html = preactImport.exports.html;
       render = preactImport.exports.render;
     } else {
@@ -70,9 +73,13 @@ export default function createViewEngine(snowPackDevServer) {
 
       BasePage = basePageComponentImport.default;
       PageComponent = pageComponentImport.default;
+      Head = pageComponentImport.Head;
+      getServerProps = pageComponentImport.getServerProps;
       html = preactImport.html;
       render = preactImport.render;
     }
+
+    const pageProps = await getServerProps({ ctx: { db } });
 
     const initScript = createInitScript({
       page: pageName,
@@ -81,7 +88,7 @@ export default function createViewEngine(snowPackDevServer) {
     });
 
     const pageElement = html`
-      <${BasePage} head=${PageComponent.Head} debug=${dev}>
+      <${BasePage} head=${Head} debug=${dev}>
         <${PageComponent} ...${pageProps} />
 
         <script

@@ -9,15 +9,17 @@ import serialize from "serialize-javascript";
  *  page and passed in as props to the page component. This is how we can use
  *  server-side data to hydrate the component client-side.
  * @param {boolean} options.debug - If `true`, the Preact dev-tools will be
+ * @param {string} options.pageImportPath - Import page for the page component
  *   imported.
  *
  * @returns {string}
  */
-export default function createInitScript({ page, pageProps, debug }) {
+export default function createInitScript(options) {
+  const { page, pageProps, debug, pageImportPath } = options;
   const serializedPageProps = serialize(pageProps, { isJSON: true });
 
   const script = `
-    import ${page} from "/pages/${page}.js";
+    import ${page} from "${pageImportPath}";
     import initPage from "/utils/initPage.js";
 
     initPage({

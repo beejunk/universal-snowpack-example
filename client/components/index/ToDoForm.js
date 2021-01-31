@@ -1,6 +1,6 @@
 import { useState } from "preact/hooks";
 import PropTypes from "prop-types";
-import { html } from "../../utils/preact";
+import { html } from "../../utils/preact.js";
 
 function ToDoForm(props) {
   const { addToDo } = props;

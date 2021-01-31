@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { html } from "../../utils/preact";
+import { html } from "../../utils/preact.js";
 
 function ToDo(props) {
   const { text, removeToDo } = props;
@@ -7,9 +7,7 @@ function ToDo(props) {
   return html`
     <li class="ToDo list-group-item">
       <div class="row justify-content-between align-items-center">
-        <div class="col-8 col-xl-9">
-          ${text}
-        </div>
+        <div class="col-8 col-xl-9">${text}</div>
 
         <div class="col-4 col-xl-3">
           <button

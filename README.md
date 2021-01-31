@@ -15,6 +15,7 @@ The goal of this project is to provide an example application where no bundlers 
 * No bundlers are used, even for production code.
 * Minimal build steps required. Code is not minified for production.
 * All code is pure JavaScript. Babel is not used, and Preact combined with [htm](https://github.com/developit/htm) is used to build components without JSX.
+* Basic implementation of [Next.js](https://nextjs.org/)-like file system routing
 
 See the comments in the code for more details on the implementation.
 

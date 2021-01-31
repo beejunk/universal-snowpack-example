@@ -1,8 +1,9 @@
 import { useReducer } from "preact/hooks";
 import PropTypes from "prop-types";
 
-import { html } from "../utils/preact";
+import { html } from "../utils/preact.js";
 import shoddyUUIDGenerator from "../utils/shoddyUUIDGenerator.js";
+import Layout from "../components/shared/Layout.js";
 import ToDo from "../components/index/ToDo.js";
 import ToDoForm from "../components/index/ToDoForm.js";
 
@@ -53,49 +54,39 @@ function ToDoList(props) {
   const [state, dispatch] = useReducer(reducer, props);
 
   return html`
-    <main id=${PAGE} class="container-fluid">
-      <div class="row justify-content-center">
-        <div class="col-12 col-sm-8 col-xl-6">
-          <h1 class="text-center">
-            To-Do with Snowpack v3!
-          </h1>
+    <${Layout}>
+      <main id=${PAGE}>
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-8 col-xl-6">
+            <ul class="list-group">
+              ${state.toDos.map(
+                (toDoId) => html`
+                  <${ToDo}
+                    key=${toDoId}
+                    text=${state.toDosById[toDoId].text}
+                    removeToDo=${() => {
+                      dispatch(removeToDo(toDoId));
+                    }}
+                  />
+                `
+              )}
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="row justify-content-center">
-        <div class="col-12 col-sm-8 col-xl-6">
-          <ul class="list-group">
-            ${state.toDos.map(
-              (toDoId) => html`
-                <${ToDo}
-                  key=${toDoId}
-                  text=${state.toDosById[toDoId].text}
-                  removeToDo=${() => {
-                    dispatch(removeToDo(toDoId));
-                  }}
-                />
-              `
-            )}
-          </ul>
+        <div class="row justify-content-center mt-4">
+          <div class="col-12 col-sm-8 col-xl-6">
+            <${ToDoForm}
+              addToDo=${(text) => {
+                dispatch(addToDo(text));
+              }}
+            />
+          </div>
         </div>
-      </div>
-
-      <div class="row justify-content-center mt-4">
-        <div class="col-12 col-sm-8 col-xl-6">
-          <${ToDoForm}
-            addToDo=${(text) => {
-              dispatch(addToDo(text));
-            }}
-          />
-        </div>
-      </div>
-    </main>
+      </main>
+    <//>
   `;
 }
-
-ToDoList.Head = html` <title>To-Do with Snowpack!</title> `;
-
-ToDoList.pageName = PAGE;
 
 ToDoList.defaultProps = {
   toDos: [],
@@ -110,5 +101,15 @@ ToDoList.propTypes = {
     })
   ),
 };
+
+export const Head = html`<title>To-Do with Snowpack!</title>`;
+
+export async function getServerProps({ ctx }) {
+  const { db } = ctx;
+
+  const props = await db.getTodos();
+
+  return props;
+}
 
 export default ToDoList;

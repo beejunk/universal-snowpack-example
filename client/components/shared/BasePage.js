@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { html } from "../../utils/preact";
+import { html } from "../../utils/preact.js";
 
 function BasePage(props) {
   const { children, head, debug } = props;

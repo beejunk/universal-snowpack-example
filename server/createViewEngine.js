@@ -1,5 +1,10 @@
 import createInitScript from "./utils/createInitScript.js";
 import withDoctype from "./utils/withDoctype.js";
+import {
+  getPageNameFromPath,
+  getImportFromFilePath,
+} from "./utils/routUtils.js";
+import db from "../db/db.js";
 
 /**
  * Create an Express view engine.
@@ -14,19 +19,21 @@ import withDoctype from "./utils/withDoctype.js";
  */
 export default function createViewEngine(snowPackDevServer) {
   /**
-   * Preact-based view engine. There's only one page (Index) in this example, so
-   * it's a pretty simple implementation.
+   * Preact-based view engine.
    *
    * @param {string} filePath
    * @param {Object} options
    * @param {Function} callback
    */
   return async function viewEngine(filePath, options, callback) {
-    const { pageProps } = options;
     const dev = !!snowPackDevServer;
+    const pageName = getPageNameFromPath(filePath);
+    const pageImportPath = getImportFromFilePath(filePath);
 
     let BasePage;
-    let Index;
+    let PageComponent;
+    let Head;
+    let getServerProps;
     let html;
     let render;
 
@@ -36,55 +43,68 @@ export default function createViewEngine(snowPackDevServer) {
 
       const importPromises = [
         runtime.importModule("/components/shared/BasePage.js"),
-        runtime.importModule("/pages/Index.js"),
+        runtime.importModule(pageImportPath),
         runtime.importModule("/utils/preact.js"),
       ];
 
       const [
         basePageComponentImport,
-        indexComponentImport,
+        pageComponentImport,
         preactImport,
       ] = await Promise.all(importPromises);
 
       BasePage = basePageComponentImport.exports.default;
-      Index = indexComponentImport.exports.default;
+      PageComponent = pageComponentImport.exports.default;
+      Head = pageComponentImport.exports.Head;
+      getServerProps = pageComponentImport.exports.getServerProps;
       html = preactImport.exports.html;
       render = preactImport.exports.render;
     } else {
       // Import assets directly from build folder
       const importPromises = [
         import("../build/components/shared/BasePage.js"),
-        import("../build/pages/Index.js"),
+        import(`../build${pageImportPath}`),
         import("../build/utils/preact.js"),
       ];
       const [
         basePageComponentImport,
-        indexComponentImport,
+        pageComponentImport,
         preactImport,
       ] = await Promise.all(importPromises);
 
       BasePage = basePageComponentImport.default;
-      Index = indexComponentImport.default;
+      PageComponent = pageComponentImport.default;
+      Head = pageComponentImport.Head;
+      getServerProps = pageComponentImport.getServerProps;
       html = preactImport.html;
       render = preactImport.render;
     }
 
+    let pageProps = {};
+
+    if (getServerProps) {
+      pageProps = await getServerProps({ ctx: { db } });
+    }
+
     const initScript = createInitScript({
-      page: "Index",
+      page: pageName,
+      pageImportPath,
       pageProps,
       debug: dev,
     });
 
     const pageElement = html`
-      <${BasePage} head=${Index.Head} debug=${dev}>
-        <${Index} ...${pageProps} />
+      <${BasePage} head=${Head} debug=${dev}>
+        <${PageComponent} ...${pageProps} />
 
-        <script
-          type="module"
-          dangerouslySetInnerHTML="${{
-            __html: initScript,
-          }}"
-        />
+        ${PageComponent.hydrate !== false
+          ? html`<script
+              type="module"
+              dangerouslySetInnerHTML="${{
+                __html: initScript,
+              }}"
+            />`
+          : null}
       <//>
     `;
 

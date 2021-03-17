@@ -3,7 +3,7 @@ import withDoctype from "./utils/withDoctype.js";
 import {
   getPageNameFromPath,
   getImportFromFilePath,
-} from "./utils/routUtils.js";
+} from "./utils/routeUtils.js";
 import db from "../db/db.js";
 
 /**

@@ -4,7 +4,7 @@ import snowpack from "snowpack";
 
 import createViewEngine from "./createViewEngine.js";
 import createRoute from "./createRoute.js";
-import { getRoutes } from "./utils/routUtils.js";
+import { getRoutes } from "./utils/routeUtils.js";
 import snowpackConfig from "../snowpack.config.js";
 
 const { startServer, createConfiguration } = snowpack;

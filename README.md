@@ -11,7 +11,6 @@ The goal of this project is to provide an example application where no bundlers 
 
 * Pages are rendered server-side, and all Preact component code is shared between the server and the client.
 * All code (including server code) uses ES Modules.
-* [ESM-HMR](https://github.com/snowpackjs/esm-hmr) is enabled for development.
 * No bundlers are used, even for production code.
 * Minimal build steps required. Code is not minified for production.
 * All code is pure JavaScript. Babel is not used, and Preact combined with [htm](https://github.com/developit/htm) is used to build components without JSX.

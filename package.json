@@ -11,7 +11,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "build": "node scripts/buildClient.js",
+    "build": "snowpack build",
     "dev": "node --inspect scripts/start.js dev",
     "start": "node scripts/start.js",
     "lint": "eslint ./",
@@ -35,7 +35,7 @@
     "preact-render-to-string": "^5.1.12",
     "prop-types": "^15.7.2",
     "serialize-javascript": "^5.0.1",
-    "snowpack": "^3.0.11"
+    "snowpack": "^3.1.1"
   },
   "devDependencies": {
     "eslint": "^7.4.0",

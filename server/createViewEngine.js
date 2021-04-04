@@ -1,9 +1,6 @@
 import createInitScript from "./utils/createInitScript.js";
 import withDoctype from "./utils/withDoctype.js";
-import {
-  getPageNameFromPath,
-  getImportFromFilePath,
-} from "./utils/routeUtils.js";
+import { getImportFromFilePath } from "./utils/routeUtils.js";
 import db from "../db/db.js";
 
 /**
@@ -27,7 +24,6 @@ export default function createViewEngine(snowPackDevServer) {
    */
   return async function viewEngine(filePath, options, callback) {
     const dev = !!snowPackDevServer;
-    const pageName = getPageNameFromPath(filePath);
     const pageImportPath = getImportFromFilePath(filePath);
 
     let BasePage;
@@ -35,7 +31,7 @@ export default function createViewEngine(snowPackDevServer) {
     let Head;
     let getServerProps;
     let html;
-    let render;
+    let renderToString;
 
     if (snowPackDevServer) {
       // Import assets from dev server runtime
@@ -58,7 +54,7 @@ export default function createViewEngine(snowPackDevServer) {
       Head = pageComponentImport.exports.Head;
       getServerProps = pageComponentImport.exports.getServerProps;
       html = preactImport.exports.html;
-      render = preactImport.exports.render;
+      renderToString = preactImport.exports.renderToString;
     } else {
       // Import assets directly from build folder
       const importPromises = [
@@ -77,7 +73,7 @@ export default function createViewEngine(snowPackDevServer) {
       Head = pageComponentImport.Head;
       getServerProps = pageComponentImport.getServerProps;
       html = preactImport.html;
-      render = preactImport.render;
+      renderToString = preactImport.renderToString;
     }
 
     let pageProps = {};
@@ -86,22 +82,19 @@ export default function createViewEngine(snowPackDevServer) {
       pageProps = await getServerProps({ ctx: { db } });
     }
 
-    const initScript = createInitScript({
-      page: pageName,
-      pageImportPath,
-      pageProps,
-      debug: dev,
-    });
-
     const pageElement = html`
       <${BasePage} head=${Head} debug=${dev}>
         <${PageComponent} ...${pageProps} />
 
-        ${PageComponent.hydrate !== false
+        ${PageComponent.initPage
           ? html`<script
               type="module"
               dangerouslySetInnerHTML="${{
-                __html: initScript,
+                __html: createInitScript({
+                  pageImportPath,
+                  pageProps,
+                  debug: dev,
+                }),
               }}"
             />`
           : null}
@@ -111,7 +104,7 @@ export default function createViewEngine(snowPackDevServer) {
     let rendered;
 
     try {
-      rendered = render(pageElement);
+      rendered = renderToString(pageElement);
     } catch (err) {
       return callback(err);
     }

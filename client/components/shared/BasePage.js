@@ -22,7 +22,7 @@ function BasePage(props) {
         html`
           <script
             dangerouslySetInnerHTML="${{
-              __html: "window.HMR_WEBSOCKET_PORT = 3001;",
+              __html: "window.HMR_WEBSOCKET_PORT = 8080;",
             }}"
           />
           <script type="module" src="/_snowpack/hmr-client.js"></script>

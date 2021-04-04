@@ -15,18 +15,13 @@ import serialize from "serialize-javascript";
  * @returns {string}
  */
 export default function createInitScript(options) {
-  const { page, pageProps, debug, pageImportPath } = options;
+  const { pageProps, debug, pageImportPath } = options;
   const serializedPageProps = serialize(pageProps, { isJSON: true });
 
   const script = `
-    import ${page} from "${pageImportPath}";
-    import initPage from "/utils/initPage.js";
+    import PageComponent from "${pageImportPath}";
 
-    initPage({
-      pageProps: '${serializedPageProps}',
-      pageComponent: ${page},
-      debug: ${debug}
-    })
+    PageComponent.initPage(JSON.parse('${serializedPageProps}'));
   `;
 
   return script;

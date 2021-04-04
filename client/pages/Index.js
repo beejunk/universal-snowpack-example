@@ -1,7 +1,7 @@
 import { useReducer } from "preact/hooks";
 import PropTypes from "prop-types";
 
-import { html } from "../utils/preact.js";
+import { html, hydrate, render } from "../utils/preact.js";
 import shoddyUUIDGenerator from "../utils/shoddyUUIDGenerator.js";
 import Layout from "../components/shared/Layout.js";
 import ToDo from "../components/index/ToDo.js";
@@ -50,7 +50,7 @@ function reducer(state, action) {
   }
 }
 
-function ToDoList(props) {
+function Index(props) {
   const [state, dispatch] = useReducer(reducer, props);
 
   return html`
@@ -88,12 +88,12 @@ function ToDoList(props) {
   `;
 }
 
-ToDoList.defaultProps = {
+Index.defaultProps = {
   toDos: [],
   toDosById: {},
 };
 
-ToDoList.propTypes = {
+Index.propTypes = {
   toDos: PropTypes.arrayOf(PropTypes.number),
   toDosById: PropTypes.objectOf(
     PropTypes.shape({
@@ -112,4 +112,17 @@ export async function getServerProps({ ctx }) {
   return props;
 }
 
-export default ToDoList;
+Index.initPage = function initPage(props) {
+  let pageNode = html`<${Index} ...${props} />`;
+
+  hydrate(pageNode, document.body);
+
+  if (import.meta.hot) {
+    import.meta.hot.accept(({ module }) => {
+      pageNode = html`<${module.default} ...${props} />`;
+      render(pageNode, document.body);
+    });
+  }
+};
+
+export default Index;

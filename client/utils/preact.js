@@ -11,7 +11,7 @@
 
 import { h } from "preact";
 import htm from "htm";
-import { render as r } from "preact-render-to-string";
 
 export const html = htm.bind(h);
-export const render = r;
+export { hydrate, render } from "preact";
+export { renderToString } from "preact-render-to-string";

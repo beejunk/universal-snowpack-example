@@ -9,8 +9,6 @@ import snowpackConfig from "../snowpack.config.js";
 
 const { startServer, createConfiguration } = snowpack;
 
-const HMR_PORT = 3001;
-
 /**
  * Creates the application server.
  *
@@ -27,8 +25,6 @@ export default async function server(dev) {
   let snowPackDevServer;
 
   if (dev) {
-    config.devOptions.hmr = true;
-    config.devOptions.hmrPort = HMR_PORT;
     snowPackDevServer = await startServer({ config });
     app.engine("js", createViewEngine(snowPackDevServer));
   } else {
